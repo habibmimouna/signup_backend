@@ -1,18 +1,27 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from 'src/entities/users.entity';
+import { SignUpParams } from 'src/utils/types';
 
 @Injectable()
 export class AuthService {
 
-    async signup () {
-        return { message : 'signup was succefull'};
+    constructor(@InjectRepository(User) private userRepository: Repository<User>,) {
 
     }
-    async signin () {
-        return  'hi';
-        
+
+    async signup(userDetails: SignUpParams ) {
+        const newUser= this.userRepository.create({ ...userDetails,})
+        return this.userRepository.save(newUser);
+
     }
-    async signout () {
-        return '';
-        
+    async signin() {
+        return 'hi';
+
+    }
+    async signout() {
+        return 'hhhhhhhh';
+
     }
 }
