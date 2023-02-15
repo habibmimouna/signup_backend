@@ -3,17 +3,17 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm"
 @Entity('users')
 export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
-     id: number
+    id: number
 
-    @Column()
+    @Column({ nullable: false })
     username: string
 
-    @Column()
+    @Column({ nullable: false})
     email: string
 
-    @Column()
+    @Column({ nullable: false })
     password: string
 
-    @Column()
+    @Column({ default: true })
     isActive: boolean
 }
